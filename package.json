@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
+  , "prestart": "startDB.bat"  
   },
   "dependencies": {
     "angular-moment": "^0.9.0",
