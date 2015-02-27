@@ -13,11 +13,20 @@
     	<!-- endinject -->
 	</head>
 	<body>
-		<!-- inject-vendor -->
+		<header class="page-header">
+			<h1 class="text-center"><%= title %></h1>
+		</header>
+		<div>
+			<div ng-include="'app/layout/shell.html'"></div>
+		</div>
+		<!-- inject-vendor:js -->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
 		<script type="text/javascript" src="/javascripts/moment.js"></script>
 		<script type="text/javascript" src="/javascripts/angular-moment.js"></script>
 		<script type="text/javascript" src="/javascripts/ng-tags-input.js"></script>
+		<script type="text/javascript" src="/javascripts/angular-tablesort.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> 
 		<!-- endinject -->
 
 		<!-- inject:js -->
@@ -28,6 +37,13 @@
 		<script type="text/javascript" src="/app/core/core.module.js"></script>
 		<script type="text/javascript" src="/app/core/dataservice.js"></script>
 
+		<!-- layout module -->
+		<script type="text/javascript" src="/app/layout/layout.module.js"></script>
+		<script type="text/javascript" src="/app/layout/navbar.js"></script>
+
+		<!-- expenses module -->
+		<script type="text/javascript" src="/app/expenses/expenses.module.js"></script>
+		<script type="text/javascript" src="/app/expenses/add.expenses.directive.js"></script>
 		
 		<!-- endinject -->
 	</body>

@@ -1,0 +1,17 @@
+<div ng-controller="Navbar as nav">
+	<ul class="nav nav-pills">
+		<li ng-class="{ active : nav.isSet(1) }">
+			<a href="" ng-click="nav.setTab(1)">Add Expenses</a>
+		</li>
+		<li ng-class="{ active : nav.isSet(2) }">
+			<a href="" ng-click="nav.setTab(2)">Review Expenses</a>
+		</li>
+	</ul>
+	<!-- viewport -->
+	<div ng-show="nav.isSet(1)">
+		<et-add-expenses-tab></et-add-expenses-tab>
+	</div>
+	<div ng-show="nav.isSet(2)">
+		<!-- <et-review-expenses-tab></et-review-expenses-tab> -->
+	</div>
+</div>

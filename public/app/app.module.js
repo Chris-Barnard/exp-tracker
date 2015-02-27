@@ -6,11 +6,11 @@
 		 * Shared components
 		 */
 		[ 'app.core'
-		, 'app.widgets'
+		, 'app.layout'
 
 		/*
 		 * Feature Areas
 		 */
-		 , 'app.expenses'
+		, 'app.expenses'
 	]);
 })();
