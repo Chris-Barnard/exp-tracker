@@ -23,7 +23,6 @@
 					vm.activeExpense = expense;
 					vm.activeExpense.dateInput = moment(vm.activeExpense.dateIncurred).toDate();
 					vm.allowDelete = false;
-					$log.log(vm.activeExpense)
 				})
 		}
 
@@ -37,19 +36,31 @@
 			vm.activeExpense.amount = Number(vm.activeExpense.amount);
 			dataservice.editOneExpense(vm.activeExpense)
 				.success(function (data) {
-					close(data, 500)
+					var result = {};
+					
+					result.data = data;
+					result.status = 200;
+					close(result, 500);
 				})
 		}
 
 		function deleteActiveExpense () {
 			dataservice.deleteOneExpense(vm.activeExpense._id)
 				.success(function (data) {
-					close(data, 500)
+					var result = {};
+					
+					result.data = data;
+					result.status = 200;
+					close(result, 500);
 				})
 		}
 
 		function closeModal () {
-			close({ action : "closeClicked" }, 500)
+			var result = {};
+				
+			result.data = null;
+			result.status = 0;
+			close(result, 500);
 		}
 
 	}

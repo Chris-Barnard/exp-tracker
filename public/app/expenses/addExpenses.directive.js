@@ -69,7 +69,9 @@
 				}).then(function (modal) {
 					modal.element.modal();
 					modal.close.then(function (result) {
-						activate();
+						if (result.status) {
+							activate();
+						};
 					})
 				})
   			}
