@@ -7,7 +7,7 @@
 		 */
 		[ 'app.core'
 		, 'app.layout'
-
+		, 'app.modals'
 		/*
 		 * Feature Areas
 		 */

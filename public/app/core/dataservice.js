@@ -15,9 +15,10 @@
 			, getOneExpense : getOneExpense
 			, editOneExpense : editOneExpense
 			, deleteOneExpense : deleteOneExpense
-			
+
 			, getTagList : getTagList
-			
+			, loadTags : loadTags
+
 			, getExpensesForTag : getExpensesForTag
 			, getExpensesForMonth : getExpensesForMonth
 		};
@@ -38,7 +39,7 @@
 		};
 
 		function editOneExpense (exp) {
-			return $http.put(baseURL + '/expenses/' + exp.id, exp);
+			return $http.put(baseURL + '/expenses/' + exp._id, exp);
 		};
 
 		function deleteOneExpense (id) {
@@ -46,11 +47,14 @@
 		};
 
 		/*
-		 * GET the taglist resource
+		 * GET the taglist resources
 		 */
 		function getTagList () {
 			return $http.get(baseURL + '/expenses/taglist');
 		};
+		function loadTags (query) {
+			return $http.get('/expenses/ngtaglist?text=' + query);
+		}
 
 		/*
 		 * GET to custom query endpoints

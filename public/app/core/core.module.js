@@ -8,10 +8,6 @@
 		[ 'angularMoment'
 		, 'tableSort'
 		, 'ngTagsInput'
-		/*
-		 * Angular Core Components
-		 */
-		// , 'ngRoute'
-
+		, 'angularModalService'
 	]);
 })();
