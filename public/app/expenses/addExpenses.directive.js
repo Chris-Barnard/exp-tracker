@@ -25,13 +25,14 @@
 			vm.addExpense = addExpense;
 			vm.allowDelete = false;
 			vm.expenses = [];
-
         	vm.getActiveExpense = getActiveExpense;
+        	vm.getTodaysDate = function getTodaysDate () { return moment(Date.now()).toDate(); };
 			vm.getShowDetail = function getShowDetail () { return showDetail };
 			vm.getShowEditBox = function getShowEditBox () { return showEditBox };
 			vm.isActive = function isActive(expense) { return vm.activeExpense._id === expense._id };
-			// vm.loadTags = dataservice.loadTags;
+			vm.loadTags = dataservice.loadTags;
 			vm.onExpenseClick = onExpenseClick;
+			vm.setActiveExpense = setActiveExpense;
 
 
 			activate();
@@ -40,21 +41,38 @@
 				vm.activeExpense = {};
 				showDetail = false;
 				vm.allowDelete = false;
+				vm.activeExpense.dateInput = getTodaysDate();
 
 				dataservice.getAllExpenses().success(function (data) {
 					vm.expenses = data;
 				})
 			}
 
-			function addExpense () {  }
+			function addExpense () {
+				vm.activeExpense.dateEntered = Date.now();
+				vm.activeExpense.amount = Number(vm.activeExpense.amount);
+				this.expense.tags = [];
+
+				// convert ngTags into legacy tags
+				for (var i = 0; i < vm.activeExpense.ngTags.length; i++) {
+					vm.activeExpense.tags.push(vm.activeExpense.ngTags[i].text);
+				};
+				
+				vm.activeExpense.entrySource = 'web-app';
+				vm.activeExpense.dateIncurred = moment(vm.activeExpense.dateInput).toDate();
+				dataservice.createNewExpense(vm.activeExpense).success(function (data) {
+					if (data) { activate() };
+				})
+			}
 
 			function onExpenseClick (expense) {
 				if (vm.activeExpense._id === expense._id) {
 					showDetail = false;
 					vm.activeExpense = {};
+					vm.activeExpense.dateInput = getTodaysDate();
 				} else {
 					showDetail = true;
-					vm.activeExpense = expense;
+					setActiveExpense(expense);
 				}
 			}
 
@@ -76,6 +94,11 @@
 				})
   			}
 
+  			function setActiveExpense (expenseToSet) {
+  				vm.activeExpense = expenseToSet;
+  				vm.activeExpense.dateInput = moment(expenseToSet.dateIncurred).toDate();
+
+  			}
 	        
 		}
 	}

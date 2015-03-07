@@ -11,6 +11,7 @@
 		var baseURL = 'http://localhost:3000';
 		var service = {
 			getAllExpenses : getAllExpenses
+			, createNewExpense : createNewExpense
 
 			, getOneExpense : getOneExpense
 			, editOneExpense : editOneExpense
@@ -30,6 +31,12 @@
 		function getAllExpenses () {
 			return $http.get(baseURL + '/expenses');
 		};
+		/*
+		 * POST /expenses
+		 */
+		function createNewExpense (exp) {
+			return $http.post(baseURL + '/expenses', exp)
+		}
 
 		/*
 		 * Requests for specific resource

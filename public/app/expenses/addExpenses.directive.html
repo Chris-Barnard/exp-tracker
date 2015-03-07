@@ -1,26 +1,71 @@
 <h3>Add Expenses:</h3>
 <!-- Show recently added expenses for easy reference -->
-<ul class="list-group col-sm-5">
-	<h4>Recently Added Expenses:</h4>
-	<li class="list-group-item btn" ng-click="vm.onExpenseClick(expense)" ng-class="{ active : vm.isActive(expense) }" ng-repeat="expense in vm.expenses | orderBy: '-dateEntered' | limitTo: 3">
-		On: {{expense.dateIncurred | date: 'M/dd/yyyy'}} - Paid {{expense.amount | currency}} to {{expense.paidTo}}
-	</li>
-</ul>
-<div class="col-sm-4 col-sm-offset-1 table-bordered" ng-show="vm.getShowDetail()">
-	<h4 class="text-center">Expense Detail</h4>
-	<div class="row">
-		<div class="col-sm-6">
-			<span><strong>Date:</strong> {{vm.activeExpense.dateIncurred | date: 'M/dd/yyyy'}}</span><br>
-			<span><strong>Paid To:</strong> {{vm.activeExpense.paidTo}}</span><br>
-			<span><strong>Tags: </strong></span><span ng-repeat="tag in vm.activeExpense.tags"><strong><em>{{tag}} </em></strong></span><br>
-			<span><strong>Memo: </strong> {{vm.activeExpense.memo}}</span>
-		</div>
-		<div class="col-sm-6">
-			<span class="pull-right"><strong>Tran Type:</strong> {{vm.activeExpense.transactionType}}</span><br>
-			<span class="pull-right"><strong>Importance:</strong> {{vm.activeExpense.importance}}</span><br>
-			<h3 class="pull-right"><strong>{{vm.activeExpense.amount | currency}}</strong></h3><br>
+<div class="row">
+	<ul class="list-group col-xs-6">
+		<h4>Recently Added Expenses:</h4>
+		<li class="list-group-item btn" ng-click="vm.onExpenseClick(expense)" ng-class="{ active : vm.isActive(expense) }" ng-repeat="expense in vm.expenses | orderBy: '-dateEntered' | limitTo: 3">
+			On: {{expense.dateIncurred | date: 'M/dd/yyyy'}} - Paid {{expense.amount | currency}} to {{expense.paidTo}}
+		</li>
+	</ul>
+	<div class="col-xs-6 table-bordered" ng-show="vm.getShowDetail()">
+		<h4 class="text-center">Expense Detail</h4>
+		<div class="row">
+			<div class="col-xs-6">
+				<span><strong>Date:</strong> {{vm.activeExpense.dateIncurred | date: 'M/dd/yyyy'}}</span><br>
+				<span><strong>Paid To:</strong> {{vm.activeExpense.paidTo}}</span><br>
+				<span><strong>Tags: </strong></span><span ng-repeat="tag in vm.activeExpense.tags"><strong><em>{{tag}} </em></strong></span><br>
+				<span><strong>Memo: </strong> {{vm.activeExpense.memo}}</span>
+			</div>
+			<div class="col-xs-6">
+				<span class="pull-right"><strong>Tran Type:</strong> {{vm.activeExpense.transactionType}}</span><br>
+				<span class="pull-right"><strong>Importance:</strong> {{vm.activeExpense.importance}}</span><br>
+				<h3 class="pull-right"><strong>{{vm.activeExpense.amount | currency}}</strong></h3><br>
+			</div>
 		</div>
 	</div>
+	<button type="button" class="btn btn-warning pull-right" ng-click="vm.getActiveExpense(vm.activeExpense._id)" ng-show="vm.getShowDetail()"><span class="glyphicon glyphicon-info-sign"></span> Edit</button>
 </div>
-<button type="button" class="btn btn-warning pull-right" ng-click="vm.getActiveExpense(vm.activeExpense._id)" ng-show="vm.getShowDetail()"><span class="glyphicon glyphicon-info-sign"></span> Edit</button>
-
+<div class="row">
+	<!-- Begin expense add form -->
+	<form name="expenseForm" ng-submit="vm.addExpense()">
+		<!-- Expense Form -->
+		<h4>New Expense to Add:</h4>
+		<div class="col-sm-3">
+			<fieldset class="form-group">
+				<label>Required Fields</label>
+				<select ng-model="vm.activeExpense.transactionType" class="form-control" ng-options="transactionType for transactionType in ['credit card', 'cash', 'bank transfer', 'pinnen']" title="Transaction Type">
+					<option value>Select the Transaction Type</option>
+				</select>
+			</fieldset>
+			<fieldset class="form-group">
+				<input ng-model="vm.activeExpense.dateInput" type="date" class="form-control" placeholder="Date Incurred" title="Date Incurred" />
+			</fieldset>
+			<fieldset class="form-group">
+				<input ng-model="vm.activeExpense.amount" type="text" class="form-control" placeholder="Amount" title="Amount" />
+			</fieldset>
+			<fieldset class="form-group">
+				<input ng-model="vm.activeExpense.paidTo" type="text" class="form-control" placeholder="Paid To" title="Paid To" />
+			</fieldset>
+		</div>
+		<div class="col-sm-3">
+			<fieldset class="form-group">
+				<label>Recommended Fields</label>
+				<select ng-model="vm.activeExpense.importance" class="form-control" ng-options="importance for importance in ['Critical','High','Medium','Low']" title="Importance">
+					<option value>Select the Expense Importance</option>
+				</select>
+			</fieldset>
+			<fieldset class="form-group">
+				<tags-input ng-model="vm.activeExpense.ngTags">
+					<auto-complete source="vm.loadTags($query)"></auto-complete>
+				</tags-input>
+			</fieldset>
+			<fieldset class="form-group"> 					
+				<textarea ng-model="vm.activeExpense.memo" class="form-control" placeholder="Expense Memo Area..." title="Memo">
+				</textarea>
+			</fieldset>
+			<fieldset class="form-group">
+				<input type="submit" class="btn btn-primary pull-right" value="Submit Expense" />
+			</fieldset>
+		</div>
+</div>
+	</form>

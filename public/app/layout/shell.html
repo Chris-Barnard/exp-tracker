@@ -1,13 +1,17 @@
 <section id="content" class="content">
 	<div class="container-fluid" ng-controller="Shell as shell">
-		<div class="row">
-			<div ng-include="'app/layout/navbar.html'"></div>
-			<!-- viewport -->
-			<div ng-show="shell.isSet(1)">
-				<et-add-expenses-tab></et-add-expenses-tab>
+		<div class="row-fluid">
+			<div class="col-md-2">
+				<div ng-include="'app/layout/navbar.html'"></div>
 			</div>
-			<div ng-show="shell.isSet(2)">
-				<!-- <et-review-expenses-tab></et-review-expenses-tab> -->
+			<!-- viewport -->
+			<div class="col-md-10">
+				<div ng-show="shell.isSet(1)">
+					<et-add-expenses-tab></et-add-expenses-tab>
+				</div>
+				<div ng-show="shell.isSet(2)">
+					<!-- <et-review-expenses-tab></et-review-expenses-tab> -->
+				</div>
 			</div>
 		</div>
 	</div>
