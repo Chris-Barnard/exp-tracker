@@ -41,7 +41,7 @@
 				vm.activeExpense = {};
 				showDetail = false;
 				vm.allowDelete = false;
-				vm.activeExpense.dateInput = getTodaysDate();
+				vm.activeExpense.dateInput = vm.getTodaysDate();
 
 				dataservice.getAllExpenses().success(function (data) {
 					vm.expenses = data;
