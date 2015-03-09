@@ -52,6 +52,16 @@ var params = {
 			return next();
 		});
   	}
+  	, paidto : function (req, res, next, id) {
+  		var query = Expense.find({ paidTo : id });
+  		query.exec(function (err, expenses) {
+  			if (err) { return next(err); };
+  			if (!expenses) { return next(new Error("cannot find paidTo field")) };
+
+  			req.expenses = expenses;
+  			return next();
+  		})
+  	}
 }
 
 module.exports = params

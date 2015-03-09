@@ -19,7 +19,7 @@
 		function AddExpensesTabController (ModalService, dataservice, $log) {
 			var vm = this;
 			var showDetail = false;
-			var showEditBox = false;
+			// var showEditBox = false;
 
 			vm.activeExpense = {};
 			vm.addExpense = addExpense;
@@ -33,6 +33,7 @@
 			vm.loadTags = dataservice.loadTags;
 			vm.onExpenseClick = onExpenseClick;
 			vm.setActiveExpense = setActiveExpense;
+			vm.test = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
 
 
 			activate();
@@ -51,7 +52,7 @@
 			function addExpense () {
 				vm.activeExpense.dateEntered = Date.now();
 				vm.activeExpense.amount = Number(vm.activeExpense.amount);
-				this.expense.tags = [];
+				vm.activeExpense.tags = [];
 
 				// convert ngTags into legacy tags
 				for (var i = 0; i < vm.activeExpense.ngTags.length; i++) {
@@ -59,6 +60,12 @@
 				};
 				
 				vm.activeExpense.entrySource = 'web-app';
+				// if it is a transactionType undefined then it is the default of 'pinnen'
+				if (!vm.activeExpense.transactionType) { vm.activeExpense.transactionType = 'pinnen' };
+
+				// it I used an existing expense as a template I don't want a duplicate id error
+				vm.activeExpense._id = null;
+				$log.log(vm.activeExpense.transactionType);
 				vm.activeExpense.dateIncurred = moment(vm.activeExpense.dateInput).toDate();
 				dataservice.createNewExpense(vm.activeExpense).success(function (data) {
 					if (data) { activate() };
@@ -69,10 +76,10 @@
 				if (vm.activeExpense._id === expense._id) {
 					showDetail = false;
 					vm.activeExpense = {};
-					vm.activeExpense.dateInput = getTodaysDate();
+					vm.activeExpense.dateInput = vm.getTodaysDate();
 				} else {
 					showDetail = true;
-					setActiveExpense(expense);
+					vm.setActiveExpense(expense);
 				}
 			}
 
