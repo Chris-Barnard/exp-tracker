@@ -15,9 +15,8 @@ function getPaidToList (req, res, next) {
 	function matchPaidTo (paidToList) {
 		if (!paidToList.length) { return res.json(matchPaidToList) };
 		var curPaidTo = paidToList.pop();
-		console.log(curPaidTo);
-		console.log(curPaidTo.search(textEntered));
-		if (curPaidTo.search(textEntered) >= 0) { 
+		matchText = textEntered.toLowerCase();
+		if (curPaidTo.toLowerCase().indexOf(matchText) >= 0) { 
 			matchPaidToList.push(curPaidTo)
 		};
 		matchPaidTo(paidToList);

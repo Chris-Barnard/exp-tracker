@@ -20,6 +20,8 @@
 			, getTagList : getTagList
 			, loadTags : loadTags
 
+			, getPaidToList : getPaidToList
+
 			, getExpensesForTag : getExpensesForTag
 			, getExpensesForMonth : getExpensesForMonth
 		};
@@ -62,6 +64,13 @@
 		function loadTags (query) {
 			return $http.get('/expenses/ngtaglist?text=' + query);
 		}
+
+		/*
+		 * GET to custom query endpoints
+		 */
+		 function getPaidToList (query) {
+		 	return $http.get(baseURL + '/expenses/paidtolist?text=' + query)
+		 }
 
 		/*
 		 * GET to custom query endpoints

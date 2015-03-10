@@ -26,6 +26,7 @@
 			vm.allowDelete = false;
 			vm.expenses = [];
         	vm.getActiveExpense = getActiveExpense;
+        	vm.getPaidToList = getPaidToList;
         	vm.getTodaysDate = function getTodaysDate () { return moment(Date.now()).toDate(); };
 			vm.getShowDetail = function getShowDetail () { return showDetail };
 			vm.getShowEditBox = function getShowEditBox () { return showEditBox };
@@ -33,8 +34,6 @@
 			vm.loadTags = dataservice.loadTags;
 			vm.onExpenseClick = onExpenseClick;
 			vm.setActiveExpense = setActiveExpense;
-			vm.test = ["john", "bill", "charlie", "robert", "alban", "oscar", "marie", "celine", "brad", "drew", "rebecca", "michel", "francis", "jean", "paul", "pierre", "nicolas", "alfred", "gerard", "louis", "albert", "edouard", "benoit", "guillaume", "nicolas", "joseph"];
-
 
 			activate();
 
@@ -65,7 +64,6 @@
 
 				// it I used an existing expense as a template I don't want a duplicate id error
 				vm.activeExpense._id = null;
-				$log.log(vm.activeExpense.transactionType);
 				vm.activeExpense.dateIncurred = moment(vm.activeExpense.dateInput).toDate();
 				dataservice.createNewExpense(vm.activeExpense).success(function (data) {
 					if (data) { activate() };
@@ -105,6 +103,20 @@
   				vm.activeExpense = expenseToSet;
   				vm.activeExpense.dateInput = moment(expenseToSet.dateIncurred).toDate();
 
+  			}
+
+  			function getPaidToList (textEntered) {
+  				return dataservice.getPaidToList(textEntered)
+  					.then(function (response) {
+  						$log.log(response);
+  						var list = [];
+
+  						for (var i = 0; i < response.data.length; i++) {
+  							list.push(response.data[i]);
+  						};
+
+  						return list;
+  					})
   			}
 	        
 		}

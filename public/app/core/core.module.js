@@ -9,5 +9,6 @@
 		, 'tableSort'
 		, 'ngTagsInput'
 		, 'angularModalService'
+		, 'ui.bootstrap'
 	]);
 })();

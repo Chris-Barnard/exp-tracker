@@ -33,24 +33,24 @@
 		<div class="col-sm-3">
 			<fieldset class="form-group">
 				<label>Required Fields</label>
-				<input ng-model="vm.activeExpense.paidTo" et-auto-complete ui-items="vm.test" type="text" class="form-control" placeholder="Paid To" title="Paid To" />
+				<input ng-model="vm.activeExpense.paidTo" type="text" class="form-control" typeahead="paidTo for paidTo in vm.getPaidToList($viewValue)" placeholder="Paid To" title="Paid To" tabindex="1" />
 			</fieldset>
 			<fieldset class="form-group">
-				<input ng-model="vm.activeExpense.amount" type="text" class="form-control" placeholder="Amount" title="Amount" />
+				<input ng-model="vm.activeExpense.amount" type="text" class="form-control" placeholder="Amount" title="Amount" tabindex="2" />
 			</fieldset>
 			<fieldset class="form-group">
-				<select ng-model="vm.activeExpense.transactionType" class="form-control" ng-options="transactionType for transactionType in ['credit card', 'cash', 'bank transfer']" title="Transaction Type" default="pinnen">
+				<select ng-model="vm.activeExpense.transactionType" class="form-control" ng-options="transactionType for transactionType in ['credit card', 'cash', 'bank transfer']" title="Transaction Type" default="pinnen" tabindex="-1">
 					<option value>pinnen</option>
 				</select>
 			</fieldset>
 			<fieldset class="form-group">
-				<input ng-model="vm.activeExpense.dateInput" type="date" class="form-control" placeholder="Date Incurred" title="Date Incurred" />
+				<input ng-model="vm.activeExpense.dateInput" type="date" class="form-control" placeholder="Date Incurred" title="Date Incurred" tabindex="-1" />
 			</fieldset>
 		</div>
 		<div class="col-sm-3">
 			<fieldset class="form-group">
 				<label>Recommended Fields</label>
-				<select ng-model="vm.activeExpense.importance" class="form-control" ng-options="importance for importance in ['Critical','High','Medium','Low']" title="Importance">
+				<select ng-model="vm.activeExpense.importance" class="form-control" ng-options="importance for importance in ['Critical','High','Medium','Low']" title="Importance" tabindex="3">
 					<option value>Select the Expense Importance</option>
 				</select>
 			</fieldset>
@@ -67,5 +67,5 @@
 				<input type="submit" class="btn btn-primary pull-right" value="Submit Expense" />
 			</fieldset>
 		</div>
-</div>
 	</form>
+</div>
