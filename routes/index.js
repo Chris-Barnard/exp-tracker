@@ -31,6 +31,7 @@ router.get('/expenses/tag/:tag', tags.getOne)
 // API Request to paidto endpoint
 router.get('/expenses/paidtolist', paidto.getPaidToList)
 router.get('/expenses/paidto/:paidto', paidto.getOne)
+router.get('/expenses/paidto/:paidto/getcommontags', paidto.getCommonTags)
 
 // API Requests to specific resource
 // Placed last so endpoints sharing pathname execute first
