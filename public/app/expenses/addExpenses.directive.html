@@ -36,7 +36,7 @@
 				<input ng-model="vm.activeExpense.paidTo" type="text" class="form-control" typeahead="paidTo for paidTo in vm.getPaidToList($viewValue)" placeholder="Paid To" title="Paid To" tabindex="1" />
 			</fieldset>
 			<fieldset class="form-group">
-				<input ng-model="vm.activeExpense.amount" type="text" class="form-control" placeholder="Amount" title="Amount" tabindex="2" />
+				<input ng-model="vm.activeExpense.amount" type="text" class="form-control" placeholder="Amount" title="Amount" tabindex="2" ng-change="vm.getCommonTags()"/>
 			</fieldset>
 			<fieldset class="form-group">
 				<select ng-model="vm.activeExpense.transactionType" class="form-control" ng-options="transactionType for transactionType in ['credit card', 'cash', 'bank transfer']" title="Transaction Type" default="pinnen" tabindex="-1">

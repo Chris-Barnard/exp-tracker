@@ -21,6 +21,7 @@
 			, loadTags : loadTags
 
 			, getPaidToList : getPaidToList
+			, getCommonTags : getCommonTags
 
 			, getExpensesForTag : getExpensesForTag
 			, getExpensesForMonth : getExpensesForMonth
@@ -69,7 +70,10 @@
 		 * GET to custom query endpoints
 		 */
 		 function getPaidToList (query) {
-		 	return $http.get(baseURL + '/expenses/paidtolist?text=' + query)
+		 	return $http.get(baseURL + '/expenses/paidtolist?text=' + query);
+		 }
+		 function getCommonTags (paidToName) {
+		 	return $http.get(baseURL + '/expenses/paidto/' + paidToName + '/getcommontags');
 		 }
 
 		/*

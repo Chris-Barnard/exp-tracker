@@ -26,6 +26,7 @@
 			vm.allowDelete = false;
 			vm.expenses = [];
         	vm.getActiveExpense = getActiveExpense;
+        	vm.getCommonTags = getCommonTags;
         	vm.getPaidToList = getPaidToList;
         	vm.getTodaysDate = function getTodaysDate () { return moment(Date.now()).toDate(); };
 			vm.getShowDetail = function getShowDetail () { return showDetail };
@@ -118,7 +119,22 @@
   						return list;
   					})
   			}
-	        
+
+  			function getCommonTags() {
+  				return dataservice.getCommonTags(vm.activeExpense.paidTo)
+  					.then(function (response) {
+  						if (!vm.activeExpense.tags) { vm.activeExpense.tags = []; }
+  						for (var i = response.data.length - 1; i >= 0; i--) {
+  							// if tag isn't already in the list
+  							if (vm.activeExpense.tags.indexOf(response.data[i].name) < 0) {
+	  							// add regular tag
+	  							vm.activeExpense.tags.push(response.data[i].name);
+	  							// add to ngTags
+	  							vm.activeExpense.ngTags.push({ text : response.data[i].name })
+  							};
+  						};
+  					});
+  			}
 		}
 	}
 })();
