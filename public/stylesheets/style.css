@@ -7,6 +7,7 @@ a {
   color: #00B7FF;
 }
 
+/* adjust colors of sub-menu */
 .nav-pills.nav-sub > li.active > a,
 .nav-pills.nav-sub > li.active > a:hover,
 .nav-pills.nav-sub > li.active > a:focus {

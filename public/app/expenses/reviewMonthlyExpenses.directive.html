@@ -1,0 +1,46 @@
+<!-- Split button -->
+<div class="btn-group pull-right">
+	<button type="button" class="btn btn-primary month-select" ng-click="vmMonth.activate()">Refresh</button>
+	<button type="button" class="btn btn-primary dropdown-toggle month-select" data-toggle="dropdown" aria-expanded="false">
+		<span class="caret"></span>
+		<span class="sr-only">Toggle Dropdown</span>
+	</button>
+	<ul class="dropdown-menu" role="menu">
+		<li><a href="" ng-click="vmMonth.activate()">Refresh</a></li>
+		<li class="divider"></li>
+		<li><a href="" ng-click="vmMonth.loadMonth('Current')">Current Month</a></li>
+		<li><a href="" ng-click="vmMonth.loadMonth('Prior')">Prior Month</a></li>
+	</ul>
+</div>
+
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<h3 class="panel-title">{{vmMonth.headerString}} Expense Detail
+		</h3>
+	</div>
+	<div class="panel-body">
+		<h4>Total Monthly Expenses: {{vmMonth.totalExpenses | currency}}</h4>
+	</div>
+	<table class="table" ts-wrapper>
+		<thead>
+			<tr>
+				<th ts-criteria="dateIncurred" ts-default="descending">Date</th>
+				<th ts-criteria="paidTo|lowercase">Paid To</th>
+				<th ts-criteria="importance|parseImportance">Importance</th>
+				<th>Tags</th>
+				<th ts-criteria="amount|parseFloat">Amount</th>
+				<th>View Detail</th>
+			</tr>
+		</thead>
+		<tr ng-repeat="expense in vmMonth.expenses track by expense._id" ts-repeat>
+			<td>{{expense.dateIncurred | date}}</td>
+			<td>{{expense.paidTo}}</td>
+			<td>{{expense.importance}}</td>
+			<!-- load tags not converted -->
+			<td><a href=""ng-repeat="tag in expense.tags" ng-click="vmMonth.setSubTab(2); tags.loadTag(tag)">{{tag}}  </a></td>
+			<td>{{expense.amount | currency}}</td>
+			<!-- button does nothing yet -->
+			<td><button type="button" class="btn btn-primary btn-sm" ng-click="vmMonth.editExpense(expense._id)"><span class="glyphicon glyphicon-info-sign"></span> Details</button></td>
+		</tr>
+	</table>
+</div>

@@ -6,11 +6,20 @@
 			</div>
 			<!-- viewport -->
 			<div class="col-md-10">
+				<!-- Add Expenses Tab -->
 				<div ng-show="shell.isSet(1)">
 					<et-add-expenses-tab></et-add-expenses-tab>
 				</div>
+				<!-- Review Expenses Tab -->
 				<div ng-show="shell.isSet(2)">
-					<!-- <et-review-expenses-tab></et-review-expenses-tab> -->
+					<!-- Review Monthly Expenses -->
+					<div ng-show="shell.isSetSubTab(1)">
+						<et-review-monthly-expenses-tab></et-review-monthly-expenses-tab>
+					</div>
+					<!-- Review Tab Expenses -->
+					<div ng-show="shell.isSetSubTab(2)">
+						<et-review-tagged-expenses-tab></et-review-tagged-expenses-tab>
+					</div>
 				</div>
 			</div>
 		</div>

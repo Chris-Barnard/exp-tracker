@@ -1,0 +1,46 @@
+<div class="btn-group-vertical col-xs-2" role="group" data-toggle="buttons">
+	<label ng-repeat="tag in vmTag.tagList" class="btn btn-info" ng-class="{ active:tag.activeTag }" ng-click="vmTag.setStatus(tag.name, true)">
+		<input type="checkbox" autocomplete="off" ng-model="tag.status" > {{tag.name}}
+	</label>
+</div>
+<div class="col-xs-10">
+	<!-- Split button -->
+	<div class="btn-group pull-right">
+		<button type="button" class="btn btn-primary month-select" ng-click="vmTag.activate()">Refresh</button>
+		<button type="button" class="btn btn-primary dropdown-toggle month-select" data-toggle="dropdown" aria-expanded="false">
+			<span class="caret"></span>
+			<span class="sr-only">Toggle Dropdown</span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="" ng-click="vmTag.activate()">Refresh</a></li>
+		</ul>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title">Active Tag Expenses
+			</h3>
+		</div>
+		<div class="panel-body">
+			<h4>Expenses for Selected Tags: {{vmTag.totalExpenses | currency}}</h4>
+		</div>
+		<table class="table" ts-wrapper>
+			<tr>
+				<th ts-criteria="dateIncurred">Date</th>
+				<th ts-criteria="paidTo|lowercase">Paid To</th>
+				<th ts-criteria="importance|parseImportance" ts-default="descending">Importance</th>
+				<th ts-criteria="transactionType|lowercase">Transaction Type</th>
+				<th ts-criteria="amount|parseFloat">Amount</th>
+				<th>View Detail</th>
+			</tr>
+			<tr ng-repeat="expense in vmTag.expenses track by expense._id" ts-repeat>
+				<td>{{expense.dateIncurred | date}}</td>
+				<td>{{expense.paidTo}}</td>
+				<td>{{expense.importance}}</td>
+				<td>{{expense.transactionType}}</td>
+				<td>{{expense.amount | currency}}</td>
+				<td><button type="button" class="btn btn-primary btn-sm" ng-click="vmTag.editExpense(expense._id)"><span class="glyphicon glyphicon-info-sign"></span> Details</button></td>
+			</tr>
+		</table>
+	</div>
+
+</div>

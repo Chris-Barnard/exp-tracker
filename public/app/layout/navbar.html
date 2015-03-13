@@ -6,5 +6,13 @@
 		<li ng-class="{ active : shell.isSet(2) }">
 			<a href="" ng-click="shell.setTab(2)" tabindex="-1">Review Expenses</a>
 		</li>
+		<ul class="nav nav-pills nav-stacked nav-sub">
+			<li ng-show="shell.isSet(2)" ng-class="{ active : shell.isSetSubTab(1) }">
+				<a href="" ng-click="shell.setSubTab(1)" tabindex="-1">Monthly Expense Review</a>
+			</li>
+			<li ng-show="shell.isSet(2)" ng-class="{ active : shell.isSetSubTab(2) }">
+				<a href="" ng-click="shell.setSubTab(2)" tabindex="-1">Tagged Expense Review</a>				
+			</li>
+		</ul>
 	</ul>
 </div>
